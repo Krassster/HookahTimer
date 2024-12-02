@@ -1,56 +1,81 @@
 import { StyleSheet } from 'react-native';
 
-export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#E5FBFF',
+export  const styles = StyleSheet.create({
+  container: { 
+    flex: 1, 
+    padding: 20, 
+    backgroundColor: '#e1f7fe' 
   },
-  title: {
-    fontSize: 24,
+  title: { 
+    fontSize: 24, 
+    fontWeight: 'bold', 
+    marginBottom: 20 
+  },
+  card: { 
+    marginBottom: 15, 
+    padding: 15, 
+    backgroundColor: '#fff', 
+    borderRadius: 8, 
+    elevation: 3 
+  },
+  row: { 
+    flexDirection: 'row', 
+  },
+  table: {
+    textAlign: 'center',
     fontWeight: 'bold',
-    marginBottom: 20,
+    overflow: 'hidden'
   },
-  card: {
-    marginBottom: 15,
-    borderRadius: 10,
-    padding: 20,
-    backgroundColor: '#fff',
+  cell: { 
+    textAlign: 'left', 
+    padding: 5 
   },
-  row: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginBottom: 10,
+  buttonContainer: { 
+    flexDirection: 'row', 
+    justifyContent: 'space-between' 
   },
-  cell: {
-    width: '25%',
-    textAlign: 'center',
+  button: { 
+    padding: 10, 
+    borderRadius: 5, 
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    width: '48%' 
   },
-  lastReplacement: {
-    textAlign: 'center',
-    marginBottom: 10,
+  replaceButton: { 
+    backgroundColor: '#4CAF50' 
   },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+  closeButton: { 
+    backgroundColor: '#F44336' 
   },
-  button: {
-    paddingHorizontal: 20,
-    paddingVertical: 8,
-    borderRadius: 8,
+  buttonText: { 
+    color: '#fff', 
+    fontWeight: 'bold' 
   },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 20,
+  controls: { 
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    marginTop: 20 
   },
-  input: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    marginRight: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderRadius: 8,
+  timeHasPassed: {
+    fontWeight: 'light',
+    padding: 10
+  },
+  input: { 
+    flex: 1, 
+    borderWidth: 1, 
+    borderColor: '#ccc', 
+    marginRight: 10, 
+    padding: 10, 
+    borderRadius: 5 
+  },
+  addButton: { 
+    backgroundColor: '#007BFF', 
+    paddingVertical: 10, 
+    paddingHorizontal: 20, 
+    borderRadius: 5 
+  },
+  addButtonText: { 
+    color: '#fff', 
+    fontWeight: 'bold' 
   },
 });
