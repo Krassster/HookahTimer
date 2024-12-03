@@ -1,47 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, ScrollView, TextInput, View, Text, TouchableOpacity } from 'react-native';
-import { calculateTimeDifference } from './components/DifferenceTime';
-import {styles} from './style'
+import {styles} from './styles'
+import { Order } from './components/types/OrderType';
+import { Card } from './components/card/Card';
+import { Menu } from './components/menu/Menu';
+import { getAllOrders } from './services/orders.services';
 
 const tempData: Order[] = [{
   id: '3213',
   name: 'Стол 1',
-  replacements: ['12:00', '12:16', '12:34', '12:50'],
+  replacements: ['12:00:12', '12:16:24', '12:34:54', '12:50:24'],
 }]
 
-type Order = {
-  id: string;
-  name: string;
-  replacements: string[];
-};
+
 
 export default function Main() {
   const [orders, setOrders] = useState<Order[]>([]);
-  const [newOrderName, setNewOrderName] = useState<string>('');
-
+  
   useEffect(()=> {
-    setOrders(tempData)
+    const fetchData = async () => {
+      const saveOrders = await getAllOrders()
+      setOrders(saveOrders)
+    }
+    fetchData()
   }, [])
 
   const getCurrentTime = (): string => {
     const now = new Date();
-    return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' , second: '2-digit'});
   };
 
-  const addNewOrder = (): void => {
-    if (!newOrderName.trim()) return;
-    setOrders([
-      ...orders,
-      {
-        id: Date.now().toString(),
-        name: `Стол ${newOrderName}`,
-        replacements: [getCurrentTime()],
-      },
-    ]);
-    setNewOrderName('');
-  };
+ 
 
-  const handleButtonClick = (id: string): void => {
+  const handleUpdateTime = (id: string): void => {
     setOrders((prevOrders) =>
       prevOrders.map((order) => {
         if (order.id !== id) return order;
@@ -63,55 +54,19 @@ export default function Main() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Смена {new Date().toLocaleDateString('ru-RU')}</Text>
-
+      <View style={styles.header}>
+        <Text style={styles.title}>Смена {new Date().toLocaleDateString('ru-RU')}</Text>
+        <Menu />
+      </View>
+      <ScrollView showsVerticalScrollIndicator={false }>
       <FlatList
         data={orders}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={item => item.id}
         renderItem={({ item }) => (
-          <View style={styles.card}>
-            <Text style={styles.table}>{item.name}</Text>
-            <View style={styles.row}>
-              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {item.replacements.map((rep, idx) => (
-                <Text key={idx} style={styles.cell}>
-                  {rep}
-                </Text>
-              ))}
-              </ScrollView>
-            </View>
-            <Text style={styles.timeHasPassed}>прошло с последней смены: {
-            calculateTimeDifference(item.replacements[item.replacements.length - 1])
-            }</Text>
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity
-                style={[styles.button, styles.replaceButton]}
-                onPress={() => handleButtonClick(item.id)}
-              >
-                <Text style={styles.buttonText}>Заменил</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[styles.button, styles.closeButton]}
-                onPress={() => handleDeleteTable(item.id)}
-              >
-                <Text style={styles.buttonText}>Закрыл</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
+          <Card item={item} handleUpdateTime={handleUpdateTime} handleDeleteTable={handleDeleteTable}/>
         )}
       />
-
-      <View style={styles.controls}>
-        <TextInput
-          style={styles.input}
-          value={newOrderName}
-          placeholder="Номер стола"
-          onChangeText={setNewOrderName}
-        />
-        <TouchableOpacity style={styles.addButton} onPress={addNewOrder}>
-          <Text style={styles.addButtonText}>Отнес гостю</Text>
-        </TouchableOpacity>
-      </View>
+      </ScrollView>
     </View>
   );
 }

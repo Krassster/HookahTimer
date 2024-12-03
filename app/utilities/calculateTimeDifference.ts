@@ -3,7 +3,7 @@ export function calculateTimeDifference(targetTime: string | undefined): string 
         return '00:00';
       }
 
-    const [targetHours, targetMinutes] = targetTime.split(':').map(Number);
+    const [targetHours, targetMinutes, targetSeconds] = targetTime.split(':').map(Number);
     const now = new Date();
   
     const targetDate = new Date(
@@ -11,7 +11,8 @@ export function calculateTimeDifference(targetTime: string | undefined): string 
       now.getMonth(),
       now.getDate(),
       targetHours,
-      targetMinutes
+      targetMinutes,
+      targetSeconds
     );
   
     const differenceInMs = now.getTime() - targetDate.getTime();
