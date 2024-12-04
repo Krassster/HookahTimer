@@ -1,21 +1,25 @@
-import React from "react";
-import { FlatList, ScrollView, View, Text } from "react-native";
+import React, { useState } from "react";
+import {
+  FlatList,
+  ScrollView,
+  View,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import { styles } from "./styles";
 import { Order } from "./types/OrderType";
 import { Card } from "./components/card/Card";
 import { Menu } from "./components/menu/Menu";
 import { useOrders } from "./hooks/useOrder";
+import { ModalAddTable } from "./components/ModalAddTable/ModalAddTable";
+import { getCurrentTime } from "./utilities/GetCurrentTime";
 
 export default function Main() {
   const { orders, addOrder, deleteOrder } = useOrders();
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const getCurrentTime = (): string => {
-    const now = new Date();
-    return now.toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-    });
+  const toggleModal = () => {
+    setIsModalVisible(!isModalVisible);
   };
 
   const handleUpdateTime = async (id: string): Promise<void> => {
@@ -32,8 +36,6 @@ export default function Main() {
   const handleDeleteTable = async (id: string): Promise<void> => {
     await deleteOrder(id);
   };
-
-  console.log(!!orders);
 
   return (
     <View style={styles.container}>
@@ -57,7 +59,15 @@ export default function Main() {
             )}
           />
         ) : (
-          <Text> Добавить заказ?</Text>
+          <View style={styles.container}>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity style={styles.button} onPress={toggleModal}>
+                <Text style={styles.buttonText}>Добавить стол</Text>
+              </TouchableOpacity>
+            </View>
+
+            {isModalVisible && <ModalAddTable onClose={toggleModal} />}
+          </View>
         )}
       </ScrollView>
     </View>
