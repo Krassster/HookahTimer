@@ -1,74 +1,65 @@
-import React, { useEffect, useState } from 'react';
-import { FlatList, ScrollView, TextInput, View, Text, TouchableOpacity } from 'react-native';
-import {styles} from './styles'
-import { Order } from './components/types/OrderType';
-import { Card } from './components/card/Card';
-import { Menu } from './components/menu/Menu';
-import { getAllOrders } from './services/orders.services';
-
-const tempData: Order[] = [{
-  id: '3213',
-  name: 'Стол 1',
-  replacements: ['12:00:12', '12:16:24', '12:34:54', '12:50:24'],
-}]
-
-
+import React from "react";
+import { FlatList, ScrollView, View, Text } from "react-native";
+import { styles } from "./styles";
+import { Order } from "./types/OrderType";
+import { Card } from "./components/card/Card";
+import { Menu } from "./components/menu/Menu";
+import { useOrders } from "./hooks/useOrder";
 
 export default function Main() {
-  const [orders, setOrders] = useState<Order[]>([]);
-  
-  useEffect(()=> {
-    const fetchData = async () => {
-      const saveOrders = await getAllOrders()
-      setOrders(saveOrders)
-    }
-    fetchData()
-  }, [])
+  const { orders, addOrder, deleteOrder } = useOrders();
 
   const getCurrentTime = (): string => {
     const now = new Date();
-    return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' , second: '2-digit'});
+    return now.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
   };
 
- 
-
-  const handleUpdateTime = (id: string): void => {
-    setOrders((prevOrders) =>
-      prevOrders.map((order) => {
-        if (order.id !== id) return order;
-
-        order.replacements.push(getCurrentTime())
-
-        return {
-          ...order,
-        };
-      })
-    );
+  const handleUpdateTime = async (id: string): Promise<void> => {
+    const order = orders.find((order) => order.id === id);
+    if (order) {
+      const updatedOrder: Order = {
+        ...order,
+        replacements: [...order.replacements, getCurrentTime()],
+      };
+      await addOrder(updatedOrder);
+    }
   };
 
-  const handleDeleteTable = (id: string) => {
-    setOrders((prevOrders) => 
-    prevOrders.filter((order) => order.id !== id)
-    )
-  }
+  const handleDeleteTable = async (id: string): Promise<void> => {
+    await deleteOrder(id);
+  };
+
+  console.log(!!orders);
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>Смена {new Date().toLocaleDateString('ru-RU')}</Text>
+        <Text style={styles.title}>
+          Смена {new Date().toLocaleDateString("ru-RU")}
+        </Text>
         <Menu />
       </View>
-      <ScrollView showsVerticalScrollIndicator={false }>
-      <FlatList
-        data={orders}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <Card item={item} handleUpdateTime={handleUpdateTime} handleDeleteTable={handleDeleteTable}/>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {orders.length > 0 ? (
+          <FlatList
+            data={orders}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <Card
+                item={item}
+                handleUpdateTime={handleUpdateTime}
+                handleDeleteTable={handleDeleteTable}
+              />
+            )}
+          />
+        ) : (
+          <Text> Добавить заказ?</Text>
         )}
-      />
       </ScrollView>
     </View>
   );
 }
-
-
