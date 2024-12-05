@@ -11,7 +11,7 @@ export const cardStyle = StyleSheet.create({
   row: {
     flexDirection: "row",
   },
-  table: {
+  order: {
     textAlign: "center",
     fontWeight: "bold",
     overflow: "hidden",

@@ -6,15 +6,21 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
-import { styles } from "./styles";
-import { Order } from "./types/OrderType";
-import { Card } from "./components/card/Card";
-import { Menu } from "./components/menu/Menu";
-import { useOrders } from "./hooks/useOrder";
-import { ModalAddTable } from "./components/ModalAddTable/ModalAddTable";
-import { getCurrentTime } from "./utilities/GetCurrentTime";
+import { styles } from "./Main.styles";
+import { Order } from "../../../types/OrderType";
+import { Card } from "../../card/Card";
+import { Menu } from "../../menu/Menu";
+import { useOrders } from "../../../hooks/useOrder";
+import { ModalAddOrder } from "../../modalAddOrder/ModalAddOrder";
+import { getCurrentTime } from "../../../utilities/GetCurrentTime";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../../types/navigation";
 
-export default function Main() {
+type MainProps = {
+  navigation: NativeStackNavigationProp<RootStackParamList>;
+};
+
+export const Main: React.FC<MainProps> = ({ navigation }) => {
   const { orders, addOrder, deleteOrder } = useOrders();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -33,7 +39,7 @@ export default function Main() {
     }
   };
 
-  const handleDeleteTable = async (id: string): Promise<void> => {
+  const handleDeleteOrder = async (id: string): Promise<void> => {
     await deleteOrder(id);
   };
 
@@ -43,7 +49,7 @@ export default function Main() {
         <Text style={styles.title}>
           Смена {new Date().toLocaleDateString("ru-RU")}
         </Text>
-        <Menu />
+        <Menu navigation={navigation} />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         {orders.length > 0 ? (
@@ -54,7 +60,7 @@ export default function Main() {
               <Card
                 item={item}
                 handleUpdateTime={handleUpdateTime}
-                handleDeleteTable={handleDeleteTable}
+                handleDeleteOrder={handleDeleteOrder}
               />
             )}
           />
@@ -66,10 +72,10 @@ export default function Main() {
               </TouchableOpacity>
             </View>
 
-            {isModalVisible && <ModalAddTable onClose={toggleModal} />}
+            {isModalVisible && <ModalAddOrder onClose={toggleModal} />}
           </View>
         )}
       </ScrollView>
     </View>
   );
-}
+};

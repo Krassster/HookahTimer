@@ -7,5 +7,5 @@ export type Order = {
 export interface CardProps {
   item: Order;
   handleUpdateTime: (id: string) => void;
-  handleDeleteTable: (id: string) => void;
+  handleDeleteOrder: (id: string) => void;
 }

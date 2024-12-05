@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const ModalAddTableStyles = StyleSheet.create({
+export const ModalAddOrderStyles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: "#ccc",

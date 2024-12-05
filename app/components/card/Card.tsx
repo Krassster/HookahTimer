@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 export const Card: React.FC<CardProps> = ({
   item,
   handleUpdateTime,
-  handleDeleteTable,
+  handleDeleteOrder,
 }) => {
   const [timeDifference, setTimeDifference] = useState<string>("");
 
@@ -23,7 +23,7 @@ export const Card: React.FC<CardProps> = ({
 
   return (
     <View style={styles.card}>
-      <Text style={styles.table}>{item.name}</Text>
+      <Text style={styles.order}>{item.name}</Text>
       <View style={styles.row}>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {item?.replacements.map((rep, idx) => {
@@ -47,7 +47,7 @@ export const Card: React.FC<CardProps> = ({
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.button, styles.closeButton]}
-          onPress={() => handleDeleteTable(item.id)}>
+          onPress={() => handleDeleteOrder(item.id)}>
           <Text style={styles.buttonText}>Закрыл</Text>
         </TouchableOpacity>
       </View>

@@ -9,23 +9,29 @@ import {
 import { MenuStyles as styles } from "./Menu.styles";
 import { Hamburger } from "../hamburger/Hamburger";
 import { useState } from "react";
-import { ModalAddTable } from "../ModalAddTable/ModalAddTable";
+import { ModalAddOrder } from "../modalAddOrder/ModalAddOrder";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../types/navigation";
 
-export const Menu = () => {
+type MenuProps = {
+  navigation: NativeStackNavigationProp<RootStackParamList>;
+};
+
+export const Menu: React.FC<MenuProps> = ({ navigation }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isAddTableVisible, setIsAddTableVisible] = useState(false);
+  const [isAddOrderVisible, setIsAddOrderVisible] = useState(false);
 
   const toggleMenu = () => {
     setIsModalVisible(!isModalVisible);
   };
 
-  const handleAddTable = () => {
+  const handleAddOrder = () => {
     setIsModalVisible(false);
-    setIsAddTableVisible(true);
+    setIsAddOrderVisible(true);
   };
 
   const handleCloseShift = () => {
-    console.log("Закрыть смену");
+    navigation.goBack();
     setIsModalVisible(false);
   };
 
@@ -48,7 +54,7 @@ export const Menu = () => {
           <View style={styles.modalOverlay}>
             <View style={styles.menu}>
               <TouchableOpacity
-                onPress={handleAddTable}
+                onPress={handleAddOrder}
                 style={styles.menuItem}>
                 <Text style={styles.menuText}>Добавить стол</Text>
               </TouchableOpacity>
@@ -61,8 +67,8 @@ export const Menu = () => {
           </View>
         </TouchableWithoutFeedback>
       </Modal>
-      {isAddTableVisible && (
-        <ModalAddTable onClose={() => setIsAddTableVisible(false)} />
+      {isAddOrderVisible && (
+        <ModalAddOrder onClose={() => setIsAddOrderVisible(false)} />
       )}
     </View>
   );

@@ -1,10 +1,10 @@
 import { Modal, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { ModalAddTableStyles as styles } from "./ModalAddTable.styles";
+import { ModalAddOrderStyles as styles } from "./ModalAddOrder.styles";
 import { useState } from "react";
 import { getCurrentTime } from "../../utilities/GetCurrentTime";
 import { useOrders } from "../../hooks/useOrder";
 
-export const ModalAddTable = ({ onClose }: { onClose: () => void }) => {
+export const ModalAddOrder = ({ onClose }: { onClose: () => void }) => {
   const { addOrder } = useOrders();
   const [newOrderName, setNewOrderName] = useState<string>("");
 
