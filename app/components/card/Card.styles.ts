@@ -2,34 +2,51 @@ import { StyleSheet } from "react-native";
 
 export const cardStyle = StyleSheet.create({
   card: {
-    marginBottom: 15,
+    margin: 20,
+    marginBottom: 0,
     padding: 15,
     backgroundColor: "#fff",
-    borderRadius: 8,
-    elevation: 3,
-  },
-  row: {
-    flexDirection: "row",
+    borderRadius: 15,
+    elevation: 5,
   },
   order: {
     textAlign: "center",
     fontWeight: "bold",
+    fontSize: 24,
     overflow: "hidden",
+    marginBottom: 10,
+  },
+  row: {
+    flexDirection: "row",
+    padding: 5,
+    backgroundColor: "#333",
+    borderRadius: 20,
   },
   cell: {
-    textAlign: "left",
-    padding: 5,
+    color: "#fff",
+    fontSize: 16,
+    marginHorizontal: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    textAlign: "center",
+    backgroundColor: "transparent",
+  },
+  lastCell: {
+    backgroundColor: "#fff",
+    color: "#333",
   },
   buttonContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    gap: 10,
+    alignItems: "center",
+    justifyContent: "center",
   },
   button: {
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
-    width: "48%",
+    width: "30%",
   },
   replaceButton: {
     backgroundColor: "#4CAF50",
@@ -43,6 +60,7 @@ export const cardStyle = StyleSheet.create({
   },
   timeHasPassed: {
     fontWeight: "light",
+    textAlign: "center",
     padding: 10,
   },
   loadingText: {

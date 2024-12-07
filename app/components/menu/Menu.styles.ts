@@ -2,27 +2,21 @@ import { StyleSheet } from "react-native";
 
 export const MenuStyles = StyleSheet.create({
   container: {
-    padding: 20,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    backgroundColor: "#000",
+    paddingVertical: 20,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
   },
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  iconWrapper: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
     justifyContent: "center",
     alignItems: "center",
-  },
-  menu: {
-    backgroundColor: "white",
-    borderRadius: 10,
-    padding: 20,
-    width: 230,
-    alignItems: "flex-start",
-  },
-  menuItem: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-  },
-  menuText: {
-    fontSize: 18,
-    color: "#333",
+    borderWidth: 2,
+    borderColor: "#fff",
   },
 });

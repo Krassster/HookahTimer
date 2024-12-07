@@ -27,15 +27,11 @@ export const OrdersProvider: React.FC<{ children: ReactNode }> = ({
 
   const addOrder = async (order: Order): Promise<void> => {
     const existingOrders = await ordersService.getAllOrders();
-    const orderIndex = existingOrders.findIndex((o) => o.id === order.id);
+    const updatedOrders = existingOrders.filter((o) => o.id !== order.id);
 
-    if (orderIndex !== -1) {
-      existingOrders[orderIndex] = order;
-    } else {
-      existingOrders.push(order);
-    }
+    updatedOrders.push(order);
+    await ordersService.saveAllOrders(updatedOrders);
 
-    await ordersService.saveAllOrders(existingOrders);
     reloadOrders();
   };
 

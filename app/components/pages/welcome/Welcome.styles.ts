@@ -5,14 +5,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#1c1c1c",
-  },
-  image: {
-    width: "100%",
-    height: "50%",
-    resizeMode: "cover",
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    backgroundColor: "#fff",
   },
   textContainer: {
     alignItems: "center",
@@ -22,7 +15,7 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: "bold",
-    color: "#fff",
+    color: "#000",
   },
   subtitle: {
     fontSize: 16,
@@ -31,14 +24,14 @@ export const styles = StyleSheet.create({
   },
   button: {
     marginTop: 30,
-    backgroundColor: "#fdbb30",
-    paddingVertical: 15,
-    paddingHorizontal: 40,
+    backgroundColor: "#111",
+    paddingVertical: 30,
+    paddingHorizontal: 60,
     borderRadius: 30,
   },
   buttonText: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#1c1c1c",
+    color: "#fff",
   },
 });

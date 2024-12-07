@@ -2,7 +2,7 @@ import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { calculateTimeDifference } from "../../utilities/calculateTimeDifference";
 import { cardStyle as styles } from "./Card.styles";
 import { CardProps } from "./../../types/OrderType";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export const Card: React.FC<CardProps> = ({
   item,
@@ -10,6 +10,7 @@ export const Card: React.FC<CardProps> = ({
   handleDeleteOrder,
 }) => {
   const [timeDifference, setTimeDifference] = useState<string>("");
+  const scrollViewRef = useRef<ScrollView>(null);
 
   useEffect(() => {
     const updateTimeDifference = () => {
@@ -21,15 +22,25 @@ export const Card: React.FC<CardProps> = ({
     return () => clearInterval(interval);
   }, [item]);
 
+  useEffect(() => {
+    if (scrollViewRef.current) {
+      scrollViewRef.current.scrollToEnd({ animated: true });
+    }
+  }, [item.replacements]);
+
   return (
     <View style={styles.card}>
       <Text style={styles.order}>{item.name}</Text>
       <View style={styles.row}>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          ref={scrollViewRef}>
           {item?.replacements.map((rep, idx) => {
             const [hours, minutes] = rep.split(":");
+            const isLast = idx === item.replacements.length - 1;
             return (
-              <Text key={idx} style={styles.cell}>
+              <Text key={idx} style={[styles.cell, isLast && styles.lastCell]}>
                 {`${hours}:${minutes}`}
               </Text>
             );
@@ -43,12 +54,12 @@ export const Card: React.FC<CardProps> = ({
         <TouchableOpacity
           style={[styles.button, styles.replaceButton]}
           onPress={() => handleUpdateTime(item.id)}>
-          <Text style={styles.buttonText}>Заменил</Text>
+          <Text style={styles.buttonText}>заменил</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.button, styles.closeButton]}
           onPress={() => handleDeleteOrder(item.id)}>
-          <Text style={styles.buttonText}>Закрыл</Text>
+          <Text style={styles.buttonText}>закрыл</Text>
         </TouchableOpacity>
       </View>
     </View>

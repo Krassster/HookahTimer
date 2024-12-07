@@ -1,44 +1,70 @@
 import { StyleSheet } from "react-native";
 
 export const ModalAddOrderStyles = StyleSheet.create({
-  input: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    padding: 10,
-    borderRadius: 5,
-  },
-  closeButton: {
-    backgroundColor: "#F44336",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-    margin: 5,
-  },
-  addButton: {
-    backgroundColor: "#007BFF",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-    margin: 5,
-  },
-  addButtonText: {
-    color: "#fff",
-    fontWeight: "bold",
-  },
   modalOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modal: {
+    width: "80%",
+    backgroundColor: "#fff",
+    borderRadius: 20,
+    padding: 20,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  input: {
+    width: "100%",
+    height: 50,
+    backgroundColor: "#F5F5F5",
+    borderRadius: 25,
+    paddingHorizontal: 20,
+    color: "#A9A9A9",
+    fontSize: 16,
+    textAlign: "center",
+    marginBottom: 20,
   },
   buttonContainer: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
+    width: "100%",
   },
-  modal: {
-    backgroundColor: "white",
-    borderRadius: 10,
-    padding: 20,
-    alignItems: "flex-start",
+  closeButton: {
+    backgroundColor: "#ff4d4d",
+
+    borderRadius: 25,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    flex: 1,
+    marginLeft: 10,
+    alignItems: "center",
+  },
+  closeButtonText: {
+    fontSize: 16,
+    fontWeight: "500",
+    color: "#fff",
+  },
+  addButton: {
+    backgroundColor: "#4caf50",
+    borderRadius: 25,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    flex: 1,
+    marginRight: 10,
+    alignItems: "center",
+  },
+  addButtonText: {
+    fontSize: 16,
+    fontWeight: "500",
+    color: "#fff",
+  },
+  cancelButtonText: {
+    color: "#fff",
   },
 });

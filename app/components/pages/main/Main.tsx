@@ -15,6 +15,7 @@ import { ModalAddOrder } from "../../modalAddOrder/ModalAddOrder";
 import { getCurrentTime } from "../../../utilities/GetCurrentTime";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../../types/navigation";
+import { Box } from "@/components/ui/box";
 
 type MainProps = {
   navigation: NativeStackNavigationProp<RootStackParamList>;
@@ -44,38 +45,29 @@ export const Main: React.FC<MainProps> = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>
+    <Box className="flex-1">
+      <Box style={styles.headerContainer}>
+        <Text style={styles.header}>
           Смена {new Date().toLocaleDateString("ru-RU")}
         </Text>
-        <Menu navigation={navigation} />
-      </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {orders.length > 0 ? (
-          <FlatList
-            data={orders}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <Card
-                item={item}
-                handleUpdateTime={handleUpdateTime}
-                handleDeleteOrder={handleDeleteOrder}
-              />
-            )}
-          />
-        ) : (
-          <View style={styles.container}>
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity style={styles.button} onPress={toggleModal}>
-                <Text style={styles.buttonText}>Добавить стол</Text>
-              </TouchableOpacity>
-            </View>
+      </Box>
 
-            {isModalVisible && <ModalAddOrder onClose={toggleModal} />}
-          </View>
+      <FlatList
+        data={orders}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <Card
+            item={item}
+            handleUpdateTime={handleUpdateTime}
+            handleDeleteOrder={handleDeleteOrder}
+          />
         )}
-      </ScrollView>
-    </View>
+        showsVerticalScrollIndicator={false}
+      />
+
+      {isModalVisible && <ModalAddOrder onClose={toggleModal} />}
+
+      <Menu navigation={navigation} />
+    </Box>
   );
 };

@@ -33,13 +33,13 @@ export const ModalAddOrder = ({ onClose }: { onClose: () => void }) => {
             onChangeText={setNewOrderName}
           />
           <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.addButton} onPress={addNewOrder}>
+              <Text style={styles.addButtonText}>добавить</Text>
+            </TouchableOpacity>
             <TouchableOpacity
               style={styles.closeButton}
               onPress={() => onClose()}>
-              <Text style={styles.addButtonText}>Отмена</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.addButton} onPress={addNewOrder}>
-              <Text style={styles.addButtonText}>Отнес гостю</Text>
+              <Text style={styles.closeButtonText}>отмена</Text>
             </TouchableOpacity>
           </View>
         </View>
