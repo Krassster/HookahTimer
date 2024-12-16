@@ -25,15 +25,16 @@ export const ModalAddOrderStyles = StyleSheet.create({
     backgroundColor: "#F5F5F5",
     borderRadius: 25,
     paddingHorizontal: 20,
-    color: "#A9A9A9",
     fontSize: 16,
     textAlign: "center",
-    marginBottom: 20,
+    marginBottom: 8,
+    textAlignVertical: "center",
   },
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
+    marginTop: 8,
   },
   closeButton: {
     backgroundColor: "#ff4d4d",
@@ -66,5 +67,10 @@ export const ModalAddOrderStyles = StyleSheet.create({
   },
   cancelButtonText: {
     color: "#fff",
+  },
+  errorText: {
+    color: "red",
+    fontSize: 14,
+    marginVertical: 3,
   },
 });

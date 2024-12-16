@@ -1,17 +1,19 @@
-import Welcome from "./app/components/pages/welcome/Welcome";
-import "@/global.css";
-import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
-import { OrdersProvider } from "./app/context/orders.context";
-import { Main } from "./app/components/pages/main/Main";
-import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Settings from "./app/components/settings/Settings";
+import { NavigationContainer } from "@react-navigation/native";
+import { SafeAreaView } from "react-native";
+
+import Welcome from "@/components/pages/welcome/Welcome";
+import { Main } from "@/components/pages/main/Main";
+import Settings from "@/components/pages/settings/Settings";
+
+import { OrdersProvider } from "@/app/context/orders.context";
+import { StyleSheet } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <GluestackUIProvider mode="light">
+    <SafeAreaView style={styles.container}>
       <OrdersProvider>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Welcome">
@@ -33,6 +35,12 @@ export default function App() {
           </Stack.Navigator>
         </NavigationContainer>
       </OrdersProvider>
-    </GluestackUIProvider>
+    </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

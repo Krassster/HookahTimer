@@ -1,17 +1,17 @@
-import { TouchableOpacity, View } from "react-native";
-import { MenuStyles as styles } from "./Menu.styles";
+// Не используется в данном варианте
+
 import { useState } from "react";
-import { ModalAddOrder } from "../modalAddOrder/ModalAddOrder";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useNavigationState } from "@react-navigation/native";
-import { RootStackParamList } from "../../types/navigation";
+import { TouchableOpacity, View } from "react-native";
+
 import Icon from "react-native-vector-icons/Ionicons";
+import { useNavigationState } from "@react-navigation/native";
+import { ModalAddOrder } from "@/components/modalAddOrder/ModalAddOrder";
+import { saveAllOrders } from "@/app/services/orders.services";
+import { Props } from "@/app/types/navigation";
 
-type MenuProps = {
-  navigation: NativeStackNavigationProp<RootStackParamList>;
-};
+import { MenuStyles as styles } from "./Menu.styles";
 
-export const Menu: React.FC<MenuProps> = ({ navigation }) => {
+export const Menu: React.FC<Props> = ({ navigation }) => {
   const [isAddOrderVisible, setIsAddOrderVisible] = useState(false);
 
   const handleAddOrder = () => {
@@ -19,6 +19,7 @@ export const Menu: React.FC<MenuProps> = ({ navigation }) => {
   };
 
   const handleCloseShift = () => {
+    saveAllOrders([]);
     navigation.goBack();
   };
 
@@ -50,6 +51,22 @@ export const Menu: React.FC<MenuProps> = ({ navigation }) => {
 
       <TouchableOpacity style={styles.iconWrapper} onPress={handleAddOrder}>
         <Icon name="add" size={25} color="#fff" />
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={[
+          styles.iconWrapper,
+          {
+            backgroundColor: getIconStyle("Settings").backgroundColor,
+            borderColor: getIconStyle("Settings").borderColor,
+          },
+        ]}
+        onPress={() => navigation.navigate("Settings")}>
+        <Icon
+          name="settings"
+          size={25}
+          color={getIconStyle("Settings").color}
+        />
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.iconWrapper} onPress={handleCloseShift}>

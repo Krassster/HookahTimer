@@ -8,6 +8,10 @@ export const cardStyle = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 15,
     elevation: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.5,
   },
   order: {
     textAlign: "center",
@@ -37,7 +41,7 @@ export const cardStyle = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
-    gap: 10,
+    gap: 20,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -46,7 +50,7 @@ export const cardStyle = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
-    width: "30%",
+    width: "40%",
   },
   replaceButton: {
     backgroundColor: "#4CAF50",

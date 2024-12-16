@@ -1,5 +1,9 @@
 export type RootStackParamList = {
-  Welcome: undefined; // Экран Welcome без параметров
-  Main: undefined; // Экран Main без параметров
+  Welcome: undefined;
+  Main: undefined;
   Settings: undefined;
+};
+
+export type Props = {
+  navigation: NativeStackNavigationProp<RootStackParamList>;
 };

@@ -1,8 +1,10 @@
+import { useEffect, useRef, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { calculateTimeDifference } from "../../utilities/calculateTimeDifference";
+
+import { CardProps } from "@/app/types/OrderType";
+import { calculateTimeDifference } from "@/app/utilities/calculateTimeDifference";
+
 import { cardStyle as styles } from "./Card.styles";
-import { CardProps } from "./../../types/OrderType";
-import { useEffect, useState, useRef } from "react";
 
 export const Card: React.FC<CardProps> = ({
   item,
@@ -30,7 +32,7 @@ export const Card: React.FC<CardProps> = ({
 
   return (
     <View style={styles.card}>
-      <Text style={styles.order}>{item.name}</Text>
+      <Text style={styles.order}>Стол {item.name}</Text>
       <View style={styles.row}>
         <ScrollView
           horizontal

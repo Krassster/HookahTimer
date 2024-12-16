@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Order } from "../types/OrderType";
+import { Order } from "@/app/types/OrderType";
 
 export const saveAllOrders = async (orders: Order[]) => {
   try {
@@ -17,16 +17,4 @@ export const getAllOrders = async (): Promise<Order[]> => {
     console.error("Ошибка при загрузке всех заказов:", error);
     return [];
   }
-};
-
-export const saveOrder = async (order: Order) => {
-  const orders = await getAllOrders();
-  const updatedOrders = orders.filter((o) => o.id !== order.id).concat(order);
-  await saveAllOrders(updatedOrders);
-};
-
-export const removeOrder = async (id: string) => {
-  const orders = await getAllOrders();
-  const updatedOrders = orders.filter((o) => o.id !== id);
-  await saveAllOrders(updatedOrders);
 };

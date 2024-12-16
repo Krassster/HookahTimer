@@ -1,10 +1,9 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import { RootStackParamList } from "../../../types/navigation";
-import { styles } from "./Welcome.styles";
 
-type Props = NativeStackScreenProps<RootStackParamList, "Welcome">;
+import { Props } from "@/app/types/navigation";
+
+import { styles } from "./Welcome.styles";
 
 const Welcome: React.FC<Props> = ({ navigation }) => {
   return (
@@ -17,6 +16,7 @@ const Welcome: React.FC<Props> = ({ navigation }) => {
           onPress={() => navigation.navigate("Main")}>
           <Text style={styles.buttonText}>Открыть смену</Text>
         </TouchableOpacity>
+        <Text style={styles.subtitle}>Created by @krassster</Text>
       </View>
     </View>
   );

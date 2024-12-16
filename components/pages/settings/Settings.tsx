@@ -1,8 +1,12 @@
-import { RootStackParamList } from "@/app/types/navigation";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+// Не используется в данной версии
+
 import React from "react";
 import { View, Text } from "react-native";
-import { Menu } from "../menu/Menu";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+
+import { RootStackParamList } from "@/app/types/navigation";
+import { Menu } from "@/components/menu/Menu";
+
 import { styles } from "./Settings.styles";
 
 type Props = NativeStackScreenProps<RootStackParamList>;
